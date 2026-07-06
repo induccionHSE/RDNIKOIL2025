@@ -12,15 +12,17 @@
     <style>
         :root {
             /* COLORES CORPORATIVOS NIKOIL */
-            --primary: #145A32;      /* Verde Institucional Oscuro */
-            --secondary: #2E8B57;    /* Verde Medio */
-            --accent: #9CA3AF;       /* Gris/Plata (círculo del logo) */
+            --primary: #14532d;      /* Verde Oscuro Institucional Nikoil */
+            --secondary: #2e8b47;    /* Verde Medio Nikoil */
+            --accent: #b8c0c7;       /* Plata/Gris (acento tomado del "O" del logo) */
             --text-dark: #1e293b;
             --text-light: #f8fafc;
             --bg-body: #f1f5f9;
             --success: #10b981;
             --danger: #ef4444;
             --warning: #f59e0b;
+            --fill-bg: #fef9c3;
+            --fill-border: #ca8a04;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -100,7 +102,6 @@
             position: relative;
         }
 
-        /* Encabezado de Página */
         .page-header {
             display: flex; justify-content: space-between; align-items: center;
             margin-bottom: 30px; border-bottom: 2px solid #e2e8f0; padding-bottom: 15px;
@@ -109,13 +110,12 @@
         .doc-title span { font-family: 'Roboto', sans-serif; font-size: 14px; color: #64748b; font-weight: 500; }
 
         .status-pill {
-            background: #dcfce7; color: #166534;
+            background: #fef9c3; color: #854d0e;
             padding: 8px 16px; border-radius: 20px;
             font-size: 12px; font-weight: 700;
-            border: 1px solid #bbf7d0; display: flex; align-items: center; gap: 6px;
+            border: 1px solid #fde68a; display: flex; align-items: center; gap: 6px;
         }
 
-        /* Estilos de Tarjetas y Grid */
         .section-view { display: none; animation: fadeIn 0.4s ease; }
         .section-view.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
@@ -137,20 +137,17 @@
             margin-bottom: 15px; letter-spacing: 0.5px; border-bottom: 1px solid #f1f5f9; padding-bottom: 10px;
         }
 
-        /* Tablas */
         .data-table { width: 100%; border-collapse: collapse; font-size: 13px; }
         .data-table th { text-align: left; padding: 10px; background: #f8fafc; color: #475569; border-bottom: 2px solid #e2e8f0; }
         .data-table td { padding: 10px; border-bottom: 1px solid #f1f5f9; color: #334155; vertical-align: middle; }
         .data-table tr:last-child td { border-bottom: none; }
 
-        /* Etiquetas de Estado */
         .tag { padding: 4px 8px; border-radius: 4px; font-size: 10px; font-weight: 700; text-transform: uppercase; display: inline-block; }
         .tag-ok { background: #dcfce7; color: #166534; }
         .tag-warn { background: #fef9c3; color: #854d0e; }
         .tag-err { background: #fee2e2; color: #991b1b; }
         .tag-info { background: #e0f2fe; color: #075985; }
 
-        /* Elementos Específicos */
         .info-row { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 14px; }
         .info-label { font-weight: 600; color: #475569; }
 
@@ -162,20 +159,34 @@
         .dofa-green { background: #f0fdf4; border-left: 3px solid var(--success); }
         .dofa-red { background: #fef2f2; border-left: 3px solid var(--danger); }
 
-        /* Firmas */
         .signature-box { margin-top: 40px; display: flex; justify-content: center; gap: 60px; }
         .sign-line { border-top: 1px solid #334155; width: 220px; padding-top: 10px; text-align: center; font-size: 12px; font-weight: bold; }
 
-        /* Marcador de campos por diligenciar */
-        .ph {
-            background: #fffbea;
-            border: 1px dashed #f59e0b;
-            padding: 1px 6px;
+        /* --- CAMPOS EDITABLES (para diligenciar datos reales de Nikoil) --- */
+        [contenteditable="true"] {
+            background: var(--fill-bg);
+            border: 1px dashed var(--fill-border);
             border-radius: 4px;
-            color: #92400e;
-            font-weight: 700;
-            font-size: inherit;
+            padding: 3px 8px;
+            color: #854d0e;
+            font-weight: 600;
             display: inline-block;
+            min-width: 30px;
+            cursor: text;
+        }
+        [contenteditable="true"]:empty:before {
+            content: attr(data-placeholder);
+            color: #a16207;
+            opacity: 0.75;
+            font-weight: 500;
+        }
+        [contenteditable="true"]:focus {
+            outline: 2px solid var(--secondary);
+            background: #fffbea;
+        }
+        .fill-block {
+            display: block;
+            width: 100%;
         }
 
 /* =========================================
@@ -270,9 +281,9 @@
 
     <div class="sidebar">
         <div class="logo-area">
-            <img src="https://i.postimg.cc/tTMhKzGD/Logo-Nikoil-editado-(2)-(1).png" alt="Logo Nikoil Energy" class="logo-img" id="companyLogo">
+            <img src="https://i.postimg.cc/tTMhKzGD/Logo-Nikoil-editado-(2)-(1).png" alt="Logo Nikoil Energy Corp." class="logo-img" id="companyLogo">
             <h3 style="font-size:16px;">NIKOIL ENERGY CORP.</h3>
-            <p style="font-size:11px; opacity:0.7;">Sistema Integrado de Gestión</p>
+            <p style="font-size:11px; opacity:0.7;">Suc. Colombia | Sistema Integrado de Gestión</p>
         </div>
 
         <div class="nav-menu">
@@ -311,9 +322,8 @@
     </div>
 
     <div style="display:flex; gap:10px; align-items:center;">
-        <div class="status-pill"><i class="fa-solid fa-check"></i> ESTADO: FINALIZADA</div>
+        <div class="status-pill"><i class="fa-solid fa-pen"></i> ESTADO: EN ELABORACIÓN</div>
 
-        <!-- TODO: Reemplazar "#" con el enlace real del Acta PDF de Nikoil -->
         <a href="#" target="_blank" style="text-decoration:none;">
             <button style="background:var(--danger); color:white; border:none; padding:10px 20px; border-radius:20px; cursor:pointer; font-weight:bold; display:flex; align-items:center; gap:8px; box-shadow:0 4px 6px rgba(239, 68, 68, 0.3);">
                 <i class="fa-solid fa-file-pdf"></i> Ver Acta revisión PDF
@@ -370,9 +380,9 @@
                         <tr>
                             <td>Certificación ISO 50001 (Diagnóstico)</td>
                             <td>Coord. HSEQ</td>
-                            <td><span class="tag tag-err">NO INICIADO</span></td>
-                            <td>N/A</td>
-                            <td>Se reprograma o reevalúa su pertinencia para el siguiente periodo.</td>
+                            <td><span class="tag tag-warn">EN PROCESO</span></td>
+                            <td>Pendiente</td>
+                            <td>Se descartó la opción con la ARL; se recibió propuesta económica de la empresa Alfa, en espera de aprobación de recursos por Gerencia General.</td>
                         </tr>
                         <tr>
                             <td>Incorporar proceso financiero al SIG</td>
@@ -412,9 +422,9 @@
                         <tr>
                             <td>Visitas Gerenciales 360°</td>
                             <td>Gerencia</td>
-                            <td><span class="tag tag-warn">EN PROCESO</span></td>
-                            <td>Pendiente</td>
-                            <td>Se realizaron visitas parciales; se busca fortalecer el cronograma para 2026.</td>
+                            <td><span class="tag tag-ok">EJECUTADO</span></td>
+                            <td>SÍ</td>
+                            <td>Se finalizó la estructuración del cronograma de visitas HSEQ 360° y se digitalizó la captura de datos mediante formularios; queda pendiente definición de recursos para su despliegue en campo en 2026.</td>
                         </tr>
                     </tbody>
                 </table>
@@ -455,7 +465,7 @@
                         La Gerencia determina que el Cambio Climático <strong>ES PERTINENTE</strong> para el SGC/SGA/SGSST. No se aborda como un sistema separado, sino integrado a la estrategia de negocio:
                     </p>
                     <ul style="font-size:12px; margin-top:10px; padding-left:20px; line-height:1.6;">
-                        <li><strong>Pertinencia Operativa:</strong> Protección de activos en zonas de riesgo (Bloque Buenavista).</li>
+                        <li><strong>Pertinencia Operativa:</strong> Protección de activos en Bloque Buenavista (Campo Corrales).</li>
                         <li><strong>Pertinencia Legal:</strong> Cumplimiento de metas de descarbonización y reportes a autoridades.</li>
                         <li><strong>Pertinencia de Mercado:</strong> Alineación con la "Transición Energética" (Oportunidad DOFA).</li>
                     </ul>
@@ -516,9 +526,9 @@
                                 <i class="fa-solid fa-shield-halved" style="color:var(--success)"></i> EFICACIA DE CONTROLES
                             </h4>
                             <p style="font-size:11px; color:#334155; line-height:1.4;">
-                                Se gestionaron <span class="ph">[N° riesgos]</span> riesgos en <span class="ph">[N° procesos]</span> procesos corporativos.
+                                Se gestionaron <span contenteditable="true" data-placeholder="N°"></span> riesgos en <span contenteditable="true" data-placeholder="N°"></span> procesos corporativos.
                                 <br><br>
-                                <strong>Estado:</strong> Los controles para los <span class="ph">[N° Riesgos Extremos]</span> Riesgos Extremos fueron <span class="ph">[eficaces / no eficaces]</span>. <span class="ph">[Registrar si se materializaron eventos catastróficos o paradas no programadas]</span>.
+                                <strong>Estado:</strong> Los controles para los <span contenteditable="true" data-placeholder="N°"></span> Riesgos Extremos (Social, HSEQ y Cadena de Suministro) fueron <span contenteditable="true" data-placeholder="eficaces / no eficaces"></span>.
                             </p>
                         </div>
                     </div>
@@ -527,9 +537,7 @@
                         <h4 style="font-size:12px; color:#1e293b; margin-bottom:5px;">
                             <i class="fa-solid fa-chart-line" style="color:var(--secondary)"></i> OPORTUNIDADES
                         </h4>
-                        <p style="font-size:11px; color:#334155;">
-                            Se capitalizó la <strong>Transformación Digital en el proceso HSEQ</strong> (Implementación AppScript para control en campo) y la <strong>Gestión Social Preventiva</strong>.
-                        </p>
+                        <p style="font-size:11px; color:#334155;" contenteditable="true" data-placeholder="Describir oportunidades capitalizadas en 2025 (Bloque Buenavista (Campo Corrales))."></p>
                     </div>
                 </div>
 
@@ -548,55 +556,55 @@
                             <tr>
                                 <td>Competencia del Personal</td>
                                 <td>&gt;90%</td>
-                                <td><span class="ph">[Diligenciar]</span></td>
+                                <td><span contenteditable="true" data-placeholder="Completar"></span></td>
                                 <td><span class="tag tag-info">EN ANÁLISIS</span></td>
                             </tr>
                             <tr>
                                 <td>Prevención SST (IF)</td>
                                 <td>&lt; 1.0</td>
-                                <td><span class="ph">[Diligenciar]</span></td>
+                                <td><span contenteditable="true" data-placeholder="Completar"></span></td>
                                 <td><span class="tag tag-info">EN ANÁLISIS</span></td>
                             </tr>
                             <tr>
                                 <td>Ambiental</td>
                                 <td>100%</td>
-                                <td><span class="ph">[Diligenciar]</span></td>
+                                <td><span contenteditable="true" data-placeholder="Completar"></span></td>
                                 <td><span class="tag tag-info">EN ANÁLISIS</span></td>
                             </tr>
                             <tr>
                                 <td>Proveedores</td>
                                 <td>&gt;90%</td>
-                                <td><span class="ph">[Diligenciar]</span></td>
+                                <td><span contenteditable="true" data-placeholder="Completar"></span></td>
                                 <td><span class="tag tag-info">EN ANÁLISIS</span></td>
                             </tr>
                             <tr>
                                 <td>Satisfacción Cliente</td>
                                 <td>&gt;85%</td>
-                                <td><span class="ph">[Diligenciar]</span></td>
+                                <td><span contenteditable="true" data-placeholder="Completar"></span></td>
                                 <td><span class="tag tag-info">EN ANÁLISIS</span></td>
                             </tr>
                             <tr>
                                 <td>Cumplimiento Legal</td>
                                 <td>100%</td>
-                                <td><span class="ph">[Diligenciar]</span></td>
-                                <td><span class="tag tag-info">EN ANÁLISIS</span></td>
+                                <td>97,73% SST / 100% Amb.</td>
+                                <td><span class="tag tag-warn">DESVIACIÓN MENOR</span></td>
                             </tr>
                             <tr>
                                 <td>Gestión de Peligros</td>
                                 <td>100%</td>
-                                <td><span class="ph">[Diligenciar]</span></td>
+                                <td><span contenteditable="true" data-placeholder="Completar"></span></td>
                                 <td><span class="tag tag-info">EN ANÁLISIS</span></td>
                             </tr>
                             <tr>
                                 <td>Mejora Continua</td>
                                 <td>&gt;90%</td>
-                                <td><span class="ph">[Diligenciar]</span></td>
+                                <td><span contenteditable="true" data-placeholder="Completar"></span></td>
                                 <td><span class="tag tag-info">EN ANÁLISIS</span></td>
                             </tr>
                             <tr>
                                 <td>Riesgos Corporativos</td>
                                 <td>100%</td>
-                                <td><span class="ph">[Diligenciar]</span></td>
+                                <td><span contenteditable="true" data-placeholder="Completar"></span></td>
                                 <td><span class="tag tag-info">EN ANÁLISIS</span></td>
                             </tr>
                         </tbody>
@@ -621,18 +629,18 @@
                             <table class="data-table">
                                 <tr>
                                     <td><strong>Satisfacción Global</strong></td>
-                                    <td><span class="ph">[Diligenciar]</span></td>
-                                    <td><span class="ph">[Diligenciar]</span></td>
+                                    <td><span contenteditable="true" data-placeholder="X.X / 5.0"></span></td>
+                                    <td><span contenteditable="true" data-placeholder="Completar"></span></td>
                                 </tr>
                                 <tr>
                                     <td><strong>Amabilidad y Servicio</strong></td>
-                                    <td><span class="ph">[Diligenciar]</span></td>
-                                    <td><span class="ph">[Diligenciar]</span></td>
+                                    <td><span contenteditable="true" data-placeholder="X.X / 5.0"></span></td>
+                                    <td><span contenteditable="true" data-placeholder="Completar"></span></td>
                                 </tr>
                                 <tr>
                                     <td><strong>HSEQ Percibido</strong></td>
-                                    <td><span class="ph">[Diligenciar]</span></td>
-                                    <td><span class="ph">[Diligenciar]</span></td>
+                                    <td><span contenteditable="true" data-placeholder="XX%"></span></td>
+                                    <td><span contenteditable="true" data-placeholder="Completar"></span></td>
                                 </tr>
                             </table>
                         </div>
@@ -640,11 +648,11 @@
                             <h4 style="font-size:13px; margin-bottom:10px; color:#334155;">Gestión de PQRS</h4>
                             <div class="kpi-box">
                                 <div class="kpi-sub">QUEJAS GRAVES</div>
-                                <div class="kpi-val ph" style="font-size:22px;">[N]</div>
+                                <div class="kpi-val" style="color:var(--success)">0</div>
                             </div>
                             <div class="kpi-box">
                                 <div class="kpi-sub">RECLAMOS</div>
-                                <div class="kpi-val ph" style="font-size:22px;">[N]</div>
+                                <div class="kpi-val" style="color:var(--success)">0</div>
                             </div>
                         </div>
                     </div>
@@ -654,27 +662,26 @@
                     <div class="card-title">VOZ DEL CLIENTE</div>
                     <div style="background:#fef9c3; padding:10px; border-left:3px solid #eab308; margin-bottom:10px;">
                         <strong style="font-size:11px; color:#854d0e;">OPORTUNIDAD</strong>
-                        <p style="font-size:12px; margin-top:5px;" class="ph">[Registrar oportunidad de mejora identificada por el cliente de Bloque Buenavista]</p>
+                        <p style="font-size:12px; margin-top:5px;" contenteditable="true" data-placeholder="Describir oportunidad reportada por el cliente en 2025."></p>
                     </div>
                     <div style="background:#f0fdf4; padding:10px; border-left:3px solid #16a34a;">
                         <strong style="font-size:11px; color:#14532d;">FORTALEZAS</strong>
-                        <p style="font-size:12px; margin-top:5px;" class="ph">[Registrar fortalezas percibidas por el cliente de Bloque Buenavista]</p>
+                        <p style="font-size:12px; margin-top:5px;" contenteditable="true" data-placeholder="Describir fortalezas reconocidas por el cliente en 2025."></p>
                     </div>
                 </div>
 
                 <div class="card col-6">
                     <div class="card-title">4.2 GESTIÓN DE COMPRAS Y PROVEEDORES</div>
                     <div class="info-row">
-                        <span class="info-label">Total Evaluados 2024:</span> <span class="ph">[Diligenciar]</span>
+                        <span class="info-label">Total Evaluados 2024:</span> <span contenteditable="true" data-placeholder="N°"></span>
                     </div>
                     <div class="info-row">
-                        <span class="info-label">Estimado Evaluados 2025:</span> <span class="ph">[Diligenciar]</span>
+                        <span class="info-label">Estimado Evaluados 2025:</span> <span contenteditable="true" data-placeholder="N°"></span>
                     </div>
                     <div class="info-row">
-                        <span class="info-label">Calificación Promedio:</span> <span class="ph">[Diligenciar]</span>
+                        <span class="info-label">Calificación Promedio:</span> <span contenteditable="true" data-placeholder="~XX%"></span>
                     </div>
-                    <p style="font-size:12px; margin-top:10px; background:#f8fafc; padding:10px; border-radius:4px;" class="ph">
-                        [Registrar conclusión sobre proveedores con calificación deficiente y planes de mejora, si aplica]
+                    <p style="font-size:12px; margin-top:10px; background:#f8fafc; padding:10px; border-radius:4px;" contenteditable="true" data-placeholder="Conclusión: describir hallazgos de la evaluación de proveedores 2025.">
                     </p>
                 </div>
 
@@ -682,7 +689,7 @@
                     <div class="card-title">4.3 GESTIÓN AMBIENTAL (ISO 14001)</div>
                     <p style="font-size:12px; margin-bottom:15px; color:#64748b;"><strong>Referencia:</strong> ISO 14001 Numerales 9.3 (d) y (f)</p>
 
-                    <h4 style="font-size:13px; margin-bottom:10px; color:#334155;">A. Desempeño de los Programas Ambientales - Bloque Buenavista</h4>
+                    <h4 style="font-size:13px; margin-bottom:10px; color:#334155;">A. Desempeño de los Programas Ambientales (Bloque Buenavista (Campo Corrales))</h4>
                     <table class="data-table">
                         <thead>
                             <tr>
@@ -699,54 +706,54 @@
                                 <td><strong>Uso Eficiente de Agua</strong></td>
                                 <td>m³/persona/mes</td>
                                 <td>&lt; 2.5</td>
-                                <td><span class="ph">[Diligenciar]</span></td>
+                                <td><span contenteditable="true" data-placeholder="Completar"></span></td>
                                 <td><span class="tag tag-info">PENDIENTE</span></td>
-                                <td><span class="ph">[Diligenciar análisis]</span></td>
+                                <td><span contenteditable="true" data-placeholder="Completar análisis"></span></td>
                             </tr>
                             <tr>
                                 <td><strong>Gestión de Residuos</strong></td>
                                 <td>% Aprovechamiento</td>
                                 <td>&gt; 75%</td>
-                                <td><span class="ph">[Diligenciar]</span></td>
+                                <td><span contenteditable="true" data-placeholder="Completar"></span></td>
                                 <td><span class="tag tag-info">PENDIENTE</span></td>
-                                <td><span class="ph">[Diligenciar análisis]</span></td>
+                                <td><span contenteditable="true" data-placeholder="Completar análisis"></span></td>
                             </tr>
                             <tr>
                                 <td><strong>Uso Racional Energía</strong></td>
                                 <td>kWh/mes</td>
                                 <td>&lt; 15,000</td>
-                                <td><span class="ph">[Diligenciar]</span></td>
+                                <td><span contenteditable="true" data-placeholder="Completar"></span></td>
                                 <td><span class="tag tag-info">PENDIENTE</span></td>
-                                <td><span class="ph">[Diligenciar análisis]</span></td>
+                                <td><span contenteditable="true" data-placeholder="Completar análisis"></span></td>
                             </tr>
                             <tr>
                                 <td><strong>Emisiones Atmosféricas</strong></td>
                                 <td>Ton CO₂ eq/año</td>
                                 <td>&lt; 450</td>
-                                <td><span class="ph">[Diligenciar]</span></td>
+                                <td><span contenteditable="true" data-placeholder="Completar"></span></td>
                                 <td><span class="tag tag-info">PENDIENTE</span></td>
-                                <td><span class="ph">[Diligenciar análisis]</span></td>
+                                <td><span contenteditable="true" data-placeholder="Completar análisis"></span></td>
                             </tr>
                             <tr>
                                 <td><strong>Manejo RESPEL</strong></td>
                                 <td>% Disposición Legal</td>
                                 <td>100%</td>
-                                <td><span class="ph">[Diligenciar]</span></td>
+                                <td><span contenteditable="true" data-placeholder="Completar"></span></td>
                                 <td><span class="tag tag-info">PENDIENTE</span></td>
-                                <td><span class="ph">[Diligenciar análisis]</span></td>
+                                <td><span contenteditable="true" data-placeholder="Completar análisis"></span></td>
                             </tr>
                         </tbody>
                     </table>
 
   <div class="grid-container" style="margin-top:20px;">
     <div class="col-6">
-        <div class="card-title">Consumo de Agua (m³/mes) - Tendencia 2025 - Bloque Buenavista</div>
+        <div class="card-title">Consumo de Agua (m³/mes) - Tendencia 2025 <span style="text-transform:none; font-weight:400;">(datos de ejemplo — reemplazar en el código JS)</span></div>
         <div style="height: 250px; position: relative;">
             <canvas id="chartAgua"></canvas>
         </div>
     </div>
     <div class="col-6">
-        <div class="card-title">Gestión de Residuos (Kg) - Comparativo 2024 vs 2025 - Bloque Buenavista</div>
+        <div class="card-title">Gestión de Residuos (Kg) - Comparativo 2024 vs 2025 <span style="text-transform:none; font-weight:400;">(datos de ejemplo — reemplazar en el código JS)</span></div>
         <div style="height: 250px; position: relative;">
             <canvas id="chartResiduos"></canvas>
         </div>
@@ -757,27 +764,27 @@
                         <div class="col-4">
                             <div class="kpi-box" style="background:#f0fdf4; border-radius:8px;">
                                 <div class="kpi-sub">REDUCCIÓN CO₂</div>
-                                <div class="kpi-val ph" style="font-size:22px;">[%]</div>
+                                <div class="kpi-val" style="color:var(--success); font-size:28px;"><span contenteditable="true" data-placeholder="0%"></span></div>
                                 <div class="kpi-sub">vs 2024</div>
                             </div>
                         </div>
                         <div class="col-4">
                             <div class="kpi-box" style="background:#eff6ff; border-radius:8px;">
                                 <div class="kpi-sub">AHORRO AGUA</div>
-                                <div class="kpi-val ph" style="font-size:22px;">[%]</div>
+                                <div class="kpi-val" style="color:var(--secondary); font-size:28px;"><span contenteditable="true" data-placeholder="0%"></span></div>
                                 <div class="kpi-sub">Reducción consumo per cápita</div>
                             </div>
                         </div>
                         <div class="col-4">
                             <div class="kpi-box" style="background:#fef9c3; border-radius:8px;">
                                 <div class="kpi-sub">RESPEL GESTIONADO</div>
-                                <div class="kpi-val ph" style="font-size:22px;">[Ton]</div>
-                                <div class="kpi-sub">100% Legal</div>
+                                <div class="kpi-val" style="color:var(--warning); font-size:28px;"><span contenteditable="true" data-placeholder="0"></span></div>
+                                <div class="kpi-sub">Toneladas (100% Legal)</div>
                             </div>
                         </div>
                     </div>
 
-                    <h4 style="font-size:13px; margin:20px 0 10px 0; color:#334155;">B. Comunicaciones de Partes Interesadas - Bloque Buenavista</h4>
+                    <h4 style="font-size:13px; margin:20px 0 10px 0; color:#334155;">B. Comunicaciones de Partes Interesadas (Bloque Buenavista (Campo Corrales) / Administración Bogotá)</h4>
                     <table class="data-table">
                         <thead>
                             <tr>
@@ -789,48 +796,50 @@
                         <tbody>
                             <tr>
                                 <td><strong>Quejas Ambientales</strong></td>
-                                <td><span class="ph">[N]</span></td>
-                                <td class="ph">[Registrar quejas ambientales recibidas en Bloque Buenavista y la acción tomada]</td>
+                                <td><span contenteditable="true" data-placeholder="N°"></span></td>
+                                <td><span contenteditable="true" data-placeholder="Completar detalle y acción tomada"></span></td>
                             </tr>
                             <tr>
                                 <td><strong>Requerimientos Legales</strong></td>
-                                <td><span class="ph">[N]</span></td>
-                                <td class="ph">[Registrar requerimientos de autoridades ambientales (ANLA, CAR, etc.) y su estado]</td>
+                                <td><span contenteditable="true" data-placeholder="N°"></span></td>
+                                <td><span contenteditable="true" data-placeholder="Completar entidad, fecha y estado"></span></td>
                             </tr>
                             <tr>
                                 <td><strong>Solicitudes Comunidad</strong></td>
-                                <td><span class="ph">[N]</span></td>
-                                <td class="ph">[Registrar solicitudes de comunidad cercana a Bloque Buenavista y su gestión]</td>
+                                <td><span contenteditable="true" data-placeholder="N°"></span></td>
+                                <td><span contenteditable="true" data-placeholder="Completar detalle y estado"></span></td>
                             </tr>
                         </tbody>
                     </table>
 
                     <div style="background:#f0fdf4; padding:15px; margin-top:15px; border-left:4px solid var(--success); border-radius:4px;">
                         <h4 style="font-size:13px; margin-bottom:5px; color:#14532d;">✓ CONCLUSIÓN GESTIÓN AMBIENTAL 2025</h4>
-                        <p style="font-size:12px; line-height:1.6;" class="ph">
-                            [Redactar conclusión sobre el desempeño ambiental de Bloque Buenavista: número de programas cumplidos, planes de acción pendientes y relación con comunidades/autoridades]
-                        </p>
+                        <p style="font-size:12px; line-height:1.6;" contenteditable="true" data-placeholder="Completar conclusión del desempeño ambiental 2025 para Bloque Buenavista (Campo Corrales)."></p>
                     </div>
                 </div>
 
                 <div class="card col-12">
-                    <div class="card-title">4.4 SEGURIDAD Y SALUD EN EL TRABAJO (SST) - BLOQUE BUENAVISTA</div>
+                    <div class="card-title">4.4 SEGURIDAD Y SALUD EN EL TRABAJO (SST) — BLOQUE BUENAVISTA</div>
                     <div class="grid-container">
                         <div class="col-3 kpi-box">
                             <div class="kpi-sub">ACCIDENTES (AT)</div>
-                            <div class="kpi-val ph" style="font-size:22px;">[N]</div>
+                            <div class="kpi-val" style="color:var(--warning)">1</div>
+                            <div class="kpi-sub">Accidente registrable (Cert. ARL Colpatria)</div>
                         </div>
                         <div class="col-3 kpi-box">
                             <div class="kpi-sub">ENFERMEDAD LABORAL</div>
-                            <div class="kpi-val ph" style="font-size:22px;">[N]</div>
+                            <div class="kpi-val" style="color:var(--success)">0</div>
+                            <div class="kpi-sub">Casos Calificados</div>
                         </div>
                         <div class="col-3 kpi-box">
                             <div class="kpi-sub">AUSENTISMO</div>
-                            <div class="kpi-val ph" style="font-size:22px;">[Días]</div>
+                            <div class="kpi-val" style="color:var(--warning)"><span contenteditable="true" data-placeholder="N°"></span></div>
+                            <div class="kpi-sub">Días (Origen Común)</div>
                         </div>
                         <div class="col-3 kpi-box">
                             <div class="kpi-sub">DAÑOS PROPIEDAD</div>
-                            <div class="kpi-val ph" style="font-size:22px;">[N]</div>
+                            <div class="kpi-val" style="color:var(--success)"><span contenteditable="true" data-placeholder="0"></span></div>
+                            <div class="kpi-sub">Pérdidas Materiales</div>
                         </div>
 
                         <div class="col-12">
@@ -846,32 +855,32 @@
                                 <tbody>
                                     <tr>
                                         <td><strong>Inspecciones</strong></td>
-                                        <td class="ph">[Diligenciar % ejecución]</td>
+                                        <td><span contenteditable="true" data-placeholder="Ejecución Global: XX%"></span></td>
                                         <td><span class="tag tag-info">PENDIENTE</span></td>
                                     </tr>
                                     <tr>
                                         <td><strong>Mediciones Higiénicas</strong></td>
-                                        <td class="ph">[Diligenciar estado en Bloque Buenavista]</td>
+                                        <td><span contenteditable="true" data-placeholder="Completar: realizadas / pendientes en Bloque Buenavista (Campo Corrales)"></span></td>
                                         <td><span class="tag tag-info">PENDIENTE</span></td>
                                     </tr>
                                     <tr>
                                         <td><strong>Exámenes Médicos</strong></td>
-                                        <td class="ph">[Diligenciar cobertura]</td>
+                                        <td><span contenteditable="true" data-placeholder="Cobertura: XX% del personal programado"></span></td>
                                         <td><span class="tag tag-info">PENDIENTE</span></td>
                                     </tr>
                                     <tr>
                                         <td><strong>Matriz de Peligros</strong></td>
-                                        <td class="ph">[Diligenciar estado de actualización]</td>
+                                        <td><span contenteditable="true" data-placeholder="Completar estado de actualización"></span></td>
                                         <td><span class="tag tag-info">PENDIENTE</span></td>
                                     </tr>
                                     <tr>
                                         <td><strong>Reportes (Tarjetas)</strong></td>
-                                        <td class="ph">[Diligenciar N° reportes y % cierre]</td>
+                                        <td><span contenteditable="true" data-placeholder="N° Reportes | % Cerrados"></span></td>
                                         <td><span class="tag tag-info">PENDIENTE</span></td>
                                     </tr>
                                     <tr>
                                         <td><strong>COPASST</strong></td>
-                                        <td class="ph">[Diligenciar % reuniones ejecutadas]</td>
+                                        <td><span contenteditable="true" data-placeholder="% Reuniones ejecutadas"></span></td>
                                         <td><span class="tag tag-info">PENDIENTE</span></td>
                                     </tr>
                                 </tbody>
@@ -880,7 +889,7 @@
 
                         <div class="col-12" style="margin-top:10px;">
                             <h4 style="font-size:13px; margin-bottom:10px; color:#334155;">Gestión de Emergencias</h4>
-                            <p style="font-size:12px; line-height:1.6;">Se validó la capacidad de respuesta en Bloque Buenavista. <strong>Resultado:</strong> <span class="ph">[Diligenciar: EFICAZ / NO EFICAZ]</span></p>
+                            <p style="font-size:12px; line-height:1.6;">Se cuenta con el <strong>PLN-HSEQ-01 Plan de Contingencia para la Operación del Bloque Buenavista</strong>. Brigada conformada por Osvaldo Linares, Oscar Araque y Ana María Pérez. Se ejecutaron simulacros el 04/06/2025 y el 26/11/2025 (rescate), con capacitación de brigada el 26/11/2025 a través de Axa Colpatria vía OPTIMAS SAS. <strong>Resultado:</strong> EFICAZ.</p>
                             <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap:10px; margin-top:10px;">
                                 <div style="background:#f0fdf4; padding:8px; border-radius:4px; font-size:11px;">
                                     <strong>Tecnológicos:</strong> Incendio, Derrames, Explosiones
@@ -895,10 +904,9 @@
                         </div>
 
                         <div class="col-12" style="margin-top:10px;">
-                            <div style="background:#fee2e2; padding:15px; border-left:4px solid var(--danger); border-radius:4px;">
-                                <h4 style="font-size:13px; margin-bottom:5px; color:#991b1b;">⚠️ HALLAZGOS CRÍTICOS - CONTRATISTAS</h4>
-                                <p style="font-size:12px;" class="ph">
-                                    [Registrar hallazgos críticos de contratistas en Bloque Buenavista, si aplica. De lo contrario, indicar "Sin hallazgos críticos - 100% cumplimiento"]
+                            <div style="background:#f8fafc; padding:15px; border-left:4px solid #64748b; border-radius:4px;">
+                                <h4 style="font-size:13px; margin-bottom:5px; color:#334155;">HALLAZGOS - CONTRATISTAS (BLOQUE BUENAVISTA)</h4>
+                                <p style="font-size:12px;" contenteditable="true" data-placeholder="Registrar hallazgos de cumplimiento de contratistas en 2025, si aplica.">
                                 </p>
                             </div>
                         </div>
@@ -906,23 +914,27 @@
                 </div>
 
                 <div class="card col-12">
-                    <div class="card-title">4.5 PLAN ESTRATÉGICO DE SEGURIDAD VIAL (PESV - RES. 40595) - BLOQUE BUENAVISTA</div>
+                    <div class="card-title">4.5 PLAN ESTRATÉGICO DE SEGURIDAD VIAL (PESV - RES. 40595)</div>
                     <div class="grid-container">
                         <div class="col-3 kpi-box">
                             <div class="kpi-sub">SINIESTROS VIALES</div>
-                            <div class="kpi-val ph" style="font-size:22px;">[N]</div>
+                            <div class="kpi-val" style="color:var(--success)"><span contenteditable="true" data-placeholder="0"></span></div>
+                            <div class="kpi-sub">Cero Accidentes</div>
                         </div>
                         <div class="col-3 kpi-box">
                             <div class="kpi-sub">CAPACITACIÓN</div>
-                            <div class="kpi-val ph" style="font-size:22px;">[%]</div>
+                            <div class="kpi-val" style="color:var(--success)"><span contenteditable="true" data-placeholder="XX%"></span></div>
+                            <div class="kpi-sub">Conductores Formados</div>
                         </div>
                         <div class="col-3 kpi-box">
                             <div class="kpi-sub">MANTENIMIENTO</div>
-                            <div class="kpi-val ph" style="font-size:22px;">[%]</div>
+                            <div class="kpi-val" style="color:var(--success)"><span contenteditable="true" data-placeholder="XX%"></span></div>
+                            <div class="kpi-sub">Plan Cumplido</div>
                         </div>
                         <div class="col-3 kpi-box">
                             <div class="kpi-sub">INSPECCIONES</div>
-                            <div class="kpi-val ph" style="font-size:22px;">[%]</div>
+                            <div class="kpi-val" style="color:var(--success)"><span contenteditable="true" data-placeholder="XX%"></span></div>
+                            <div class="kpi-sub">Preoperacionales</div>
                         </div>
                     </div>
                     <div style="background:#eff6ff; padding:15px; margin-top:15px; border-radius:4px;">
@@ -944,49 +956,49 @@
                             <tr>
                                 <td><strong>Empleados</strong></td>
                                 <td>COPASST / Comité Convivencia / Encuestas</td>
-                                <td class="ph">[Diligenciar clima laboral y gestión de solicitudes]</td>
+                                <td><span contenteditable="true" data-placeholder="Completar"></span></td>
                             </tr>
                             <tr>
                                 <td><strong>Clientes</strong></td>
                                 <td>Encuestas / Reuniones Gerenciales</td>
-                                <td class="ph">[Diligenciar resultado de satisfacción y requerimientos gestionados]</td>
+                                <td><span contenteditable="true" data-placeholder="Completar"></span></td>
                             </tr>
                             <tr>
                                 <td><strong>Proveedores</strong></td>
                                 <td>Evaluaciones / Mesas de Trabajo</td>
-                                <td class="ph">[Diligenciar estado de alineación y exigencias HSEQ]</td>
+                                <td><span contenteditable="true" data-placeholder="Completar"></span></td>
                             </tr>
                             <tr>
                                 <td><strong>Comunidad / Sociedad</strong></td>
                                 <td>PQR / Socialización Proyectos</td>
-                                <td class="ph">[Diligenciar estado de licencia social en Bloque Buenavista]</td>
+                                <td><span contenteditable="true" data-placeholder="Completar"></span></td>
                             </tr>
                             <tr>
                                 <td><strong>Accionistas</strong></td>
                                 <td>Asambleas / Informes</td>
-                                <td class="ph">[Diligenciar respaldo y aprobación de recursos]</td>
+                                <td><span contenteditable="true" data-placeholder="Completar"></span></td>
                             </tr>
                             <tr>
                                 <td><strong>Entidades del Estado</strong></td>
                                 <td>Reportes Legales / Auditorías</td>
-                                <td class="ph">[Diligenciar cumplimiento de reportes a MinTrabajo, ANLA, etc.]</td>
+                                <td><span contenteditable="true" data-placeholder="Completar"></span></td>
                             </tr>
                             <tr>
                                 <td><strong>Empresas Pares</strong></td>
                                 <td>Alianzas Estratégicas</td>
-                                <td class="ph">[Diligenciar alianzas o sinergias vigentes]</td>
+                                <td><span contenteditable="true" data-placeholder="Completar"></span></td>
                             </tr>
                             <tr>
                                 <td><strong>Entidades Financieras</strong></td>
                                 <td>Gestión de Tesorería</td>
-                                <td class="ph">[Diligenciar cumplimiento de obligaciones financieras]</td>
+                                <td><span contenteditable="true" data-placeholder="Completar"></span></td>
                             </tr>
                         </tbody>
                     </table>
-
+            
         </div>
 <div class="card col-12">
-    <div class="card-title">4.7 CONSULTA Y PARTICIPACIÓN DE LOS TRABAJADORES - BLOQUE BUENAVISTA</div>
+    <div class="card-title">4.7 CONSULTA Y PARTICIPACIÓN DE LOS TRABAJADORES</div>
     <p style="font-size:12px; margin-bottom:15px; color:#64748b;">
         <strong>Referencia:</strong> ISO 45001 Numerales 5.4 y 9.3.2 (e)
     </p>
@@ -1005,38 +1017,38 @@
             <tr>
                 <td><strong>COPASST</strong></td>
                 <td>Mensual</td>
-                <td><span class="ph">[%]</span></td>
-                <td class="ph">[Diligenciar principales aportes del comité]</td>
+                <td><span contenteditable="true" data-placeholder="XX%"></span></td>
+                <td><span contenteditable="true" data-placeholder="Completar"></span></td>
             </tr>
             <tr>
                 <td><strong>Comité de Convivencia Laboral</strong></td>
                 <td>Trimestral</td>
-                <td><span class="ph">[%]</span></td>
-                <td class="ph">[Diligenciar gestión de clima laboral y casos, si aplica]</td>
+                <td><span contenteditable="true" data-placeholder="XX%"></span></td>
+                <td><span contenteditable="true" data-placeholder="Completar"></span></td>
             </tr>
             <tr>
                 <td><strong>Tarjetas de Reporte (Actos/Condiciones Inseguras)</strong></td>
                 <td>Permanente</td>
-                <td><span class="ph">[N° reportes]</span></td>
-                <td class="ph">[Diligenciar % de cierre y oportunidades de mejora]</td>
+                <td><span contenteditable="true" data-placeholder="N° reportes"></span></td>
+                <td><span contenteditable="true" data-placeholder="Completar"></span></td>
             </tr>
             <tr>
                 <td><strong>Encuestas y Solicitudes de Capacitación</strong></td>
                 <td>Según necesidad</td>
-                <td><span class="ph">[%]</span></td>
-                <td class="ph">[Diligenciar ejecución de solicitudes]</td>
+                <td><span contenteditable="true" data-placeholder="XX%"></span></td>
+                <td><span contenteditable="true" data-placeholder="Completar"></span></td>
             </tr>
             <tr>
                 <td><strong>Participación en Inspecciones SST</strong></td>
                 <td>Según cronograma</td>
-                <td><span class="ph">[%]</span></td>
-                <td class="ph">[Diligenciar participación de trabajadores]</td>
+                <td><span contenteditable="true" data-placeholder="XX%"></span></td>
+                <td><span contenteditable="true" data-placeholder="Completar"></span></td>
             </tr>
             <tr>
                 <td><strong>Simulacros de Emergencia</strong></td>
                 <td>Según Plan de Emergencias</td>
-                <td><span class="ph">[Estado]</span></td>
-                <td class="ph">[Diligenciar resultado de la validación en Bloque Buenavista]</td>
+                <td><span contenteditable="true" data-placeholder="Completar"></span></td>
+                <td><span contenteditable="true" data-placeholder="Completar"></span></td>
             </tr>
         </tbody>
     </table>
@@ -1046,25 +1058,29 @@
         <div class="col-3">
             <div class="kpi-box" style="background:#f0fdf4; border-radius:8px; padding:15px;">
                 <div class="kpi-sub">REUNIONES COPASST</div>
-                <div class="kpi-val ph" style="font-size:22px;">[N/N]</div>
+                <div class="kpi-val" style="color:var(--success); font-size:28px;"><span contenteditable="true" data-placeholder="N/12"></span></div>
+                <div class="kpi-sub">Cumplimiento</div>
             </div>
         </div>
         <div class="col-3">
             <div class="kpi-box" style="background:#eff6ff; border-radius:8px; padding:15px;">
                 <div class="kpi-sub">REPORTES TRABAJADORES</div>
-                <div class="kpi-val ph" style="font-size:22px;">[N]</div>
+                <div class="kpi-val" style="color:var(--secondary); font-size:28px;"><span contenteditable="true" data-placeholder="N°"></span></div>
+                <div class="kpi-sub">Tarjetas actos/condiciones</div>
             </div>
         </div>
         <div class="col-3">
             <div class="kpi-box" style="background:#fef9c3; border-radius:8px; padding:15px;">
                 <div class="kpi-sub">CIERRE DE REPORTES</div>
-                <div class="kpi-val ph" style="font-size:22px;">[%]</div>
+                <div class="kpi-val" style="color:var(--warning); font-size:28px;"><span contenteditable="true" data-placeholder="XX%"></span></div>
+                <div class="kpi-sub">Cerrados / Total</div>
             </div>
         </div>
         <div class="col-3">
             <div class="kpi-box" style="background:#f8fafc; border-radius:8px; padding:15px;">
                 <div class="kpi-sub">INSPECCIONES SST</div>
-                <div class="kpi-val ph" style="font-size:22px;">[%]</div>
+                <div class="kpi-val" style="color:var(--success); font-size:28px;"><span contenteditable="true" data-placeholder="XX%"></span></div>
+                <div class="kpi-sub">Ejecución global</div>
             </div>
         </div>
     </div>
@@ -1073,19 +1089,19 @@
     <div style="display:grid; grid-template-columns: repeat(2, 1fr); gap:15px;">
         <div style="background:#f0fdf4; padding:12px; border-left:3px solid var(--success); border-radius:4px; font-size:12px;">
             <strong style="color:#14532d;">✓ IDENTIFICACIÓN DE PELIGROS:</strong>
-            <p style="margin-top:5px;" class="ph">[Diligenciar]</p>
+            <p style="margin-top:5px;" contenteditable="true" data-placeholder="Completar"></p>
         </div>
         <div style="background:#eff6ff; padding:12px; border-left:3px solid var(--secondary); border-radius:4px; font-size:12px;">
             <strong style="color:#1e3a8a;">✓ MEJORA DE PROCEDIMIENTOS:</strong>
-            <p style="margin-top:5px;" class="ph">[Diligenciar]</p>
+            <p style="margin-top:5px;" contenteditable="true" data-placeholder="Completar"></p>
         </div>
         <div style="background:#fef9c3; padding:12px; border-left:3px solid var(--warning); border-radius:4px; font-size:12px;">
             <strong style="color:#854d0e;">✓ CAPACITACIÓN:</strong>
-            <p style="margin-top:5px;" class="ph">[Diligenciar]</p>
+            <p style="margin-top:5px;" contenteditable="true" data-placeholder="Completar"></p>
         </div>
         <div style="background:#f8fafc; padding:12px; border-left:3px solid #64748b; border-radius:4px; font-size:12px;">
             <strong style="color:#334155;">✓ CULTURA DE PREVENCIÓN:</strong>
-            <p style="margin-top:5px;" class="ph">[Diligenciar]</p>
+            <p style="margin-top:5px;" contenteditable="true" data-placeholder="Completar"></p>
         </div>
     </div>
 
@@ -1101,22 +1117,22 @@
         <tbody>
             <tr>
                 <td><strong>Solicitud COPASST</strong></td>
-                <td class="ph">[Diligenciar]</td>
+                <td><span contenteditable="true" data-placeholder="Completar"></span></td>
                 <td><span class="tag tag-info">PENDIENTE</span></td>
             </tr>
             <tr>
                 <td><strong>Reportes Trabajadores (Tarjetas)</strong></td>
-                <td class="ph">[Diligenciar]</td>
+                <td><span contenteditable="true" data-placeholder="Completar"></span></td>
                 <td><span class="tag tag-info">PENDIENTE</span></td>
             </tr>
             <tr>
                 <td><strong>Encuestas de Bienestar</strong></td>
-                <td class="ph">[Diligenciar]</td>
+                <td><span contenteditable="true" data-placeholder="Completar"></span></td>
                 <td><span class="tag tag-info">PENDIENTE</span></td>
             </tr>
             <tr>
                 <td><strong>Retroalimentación Post-Simulacros</strong></td>
-                <td class="ph">[Diligenciar]</td>
+                <td><span contenteditable="true" data-placeholder="Completar"></span></td>
                 <td><span class="tag tag-info">PENDIENTE</span></td>
             </tr>
         </tbody>
@@ -1124,9 +1140,7 @@
 
     <div style="background:#eff6ff; padding:15px; margin-top:15px; border-left:4px solid var(--secondary); border-radius:4px;">
         <h4 style="font-size:13px; margin-bottom:5px; color:#1e3a8a;">✓ CONCLUSIÓN CONSULTA Y PARTICIPACIÓN 2025</h4>
-        <p style="font-size:12px; line-height:1.6;" class="ph">
-            [Redactar conclusión sobre la eficacia de los mecanismos de consulta y participación, y la oportunidad de mejora para 2026]
-        </p>
+        <p style="font-size:12px; line-height:1.6;" contenteditable="true" data-placeholder="Completar conclusión sobre la consulta y participación de los trabajadores en 2025."></p>
     </div>
 </div> </div> </div>
         <!-- SECCIÓN 5: VERIFICACIÓN -->
@@ -1150,26 +1164,26 @@
                         <tbody>
                             <tr>
                                 <td><strong>Legal SST (Dec. 1072)</strong></td>
-                                <td><span class="ph">[%]</span></td>
-                                <td><span class="ph">[%]</span></td>
-                                <td><span class="tag tag-info">PENDIENTE</span></td>
+                                <td><span contenteditable="true" data-placeholder="XX%"></span></td>
+                                <td>97,73%</td>
+                                <td><span class="tag tag-ok">CUMPLE</span></td>
                             </tr>
                             <tr>
                                 <td><strong>Legal Ambiental</strong></td>
-                                <td><span class="ph">[%]</span></td>
-                                <td><span class="ph">[%]</span></td>
-                                <td><span class="tag tag-info">PENDIENTE</span></td>
+                                <td><span contenteditable="true" data-placeholder="XX%"></span></td>
+                                <td>100%</td>
+                                <td><span class="tag tag-ok">CUMPLE</span></td>
                             </tr>
                             <tr>
                                 <td><strong>Cambios Normativos</strong></td>
                                 <td>N/A</td>
-                                <td><span class="ph">[Estado]</span></td>
-                                <td><span class="tag tag-info">PENDIENTE</span></td>
+                                <td>Evaluadas 33 normas SST y 16 ambientales (muestreo aleatorio, AXA Colpatria / Nixus, oct-2025)</td>
+                                <td><span class="tag tag-ok">EVALUADO</span></td>
                             </tr>
                         </tbody>
                     </table>
-                    <p style="font-size:11px; margin-top:10px; background:#f8fafc; padding:8px; border-radius:4px;" class="ph">
-                        [Registrar brecha identificada y su justificación, si aplica]
+                    <p style="font-size:11px; margin-top:10px; background:#f8fafc; padding:8px; border-radius:4px;">
+                        <strong>7 Oportunidades de Mejora (SST) identificadas en la evaluación legal:</strong> (1) formalización del esquema de teletrabajo en proceso; (2) seguimiento a capacitación de conductores conforme al PESV, planeado nov-2025; (3) ampliar el alcance de la política de prevención de acoso sexual a terceros y partes interesadas; (4) solicitar al intermediario de seguros de riesgos laborales la habilitación del Ministerio de Trabajo (Res. 136/2024); (5) mediciones ambientales de iluminación pendientes en algunas sedes del grupo; (6) incluir actualización del manual de señalización vial en el plan de capacitación; (7) definir en el reglamento del Comité de Convivencia que el acoso sexual no es de su competencia (corresponde a Gestión Humana).
                     </p>
                 </div>
 
@@ -1186,33 +1200,33 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td><strong>Interna HSEQ</strong></td>
+                                <td><strong>Interna HSEQ</strong> (FOR-HSEQ-10, nov-2025)</td>
                                 <td>No Conformidades</td>
-                                <td><span class="ph">[N]</span></td>
-                                <td><span class="tag tag-info">PENDIENTE</span></td>
+                                <td>2</td>
+                                <td><span class="tag tag-warn">1 CERRADA / 1 EN PROCESO</span></td>
                             </tr>
                             <tr>
-                                <td><strong>Interna HSEQ</strong></td>
-                                <td>Oportunidades Mejora</td>
-                                <td><span class="ph">[N]</span></td>
-                                <td><span class="tag tag-info">PENDIENTE</span></td>
+                                <td><strong>Interna HSEQ</strong> (FOR-HSEQ-10, nov-2025)</td>
+                                <td>Aspectos por Mejorar</td>
+                                <td>6</td>
+                                <td><span class="tag tag-warn">EN GESTIÓN</span></td>
                             </tr>
                             <tr>
-                                <td><strong>Externa (Certificadora)</strong></td>
-                                <td>NC Mayores</td>
-                                <td><span class="ph">[N]</span></td>
-                                <td><span class="tag tag-info">PENDIENTE</span></td>
+                                <td><strong>Externa (Bureau Veritas)</strong> Visita Seguimiento 2</td>
+                                <td>NC Mayores y Menores</td>
+                                <td>0</td>
+                                <td><span class="tag tag-ok">CERTIFICACIÓN MANTENIDA</span></td>
                             </tr>
                             <tr>
-                                <td><strong>NORSOK S-006</strong></td>
+                                <td><strong>NORSOK S-WA-006:2020</strong></td>
                                 <td>Cumplimiento</td>
-                                <td><span class="ph">[%]</span></td>
-                                <td><span class="tag tag-info">PENDIENTE</span></td>
+                                <td>96,92%</td>
+                                <td><span class="tag tag-ok">SOBRESALIENTE (vence 14-jul-2026)</span></td>
                             </tr>
                             <tr>
                                 <td><strong>Estándares Mínimos</strong></td>
                                 <td>Res. 0312</td>
-                                <td><span class="ph">[%]</span></td>
+                                <td><span contenteditable="true" data-placeholder="XX%"></span></td>
                                 <td><span class="tag tag-info">PENDIENTE</span></td>
                             </tr>
                         </tbody>
@@ -1220,7 +1234,7 @@
                 </div>
 
                 <div class="card col-12">
-                    <div class="card-title">5.3 MATRIZ DETALLADA DE HALLAZGOS Y NO CONFORMIDADES - BLOQUE BUENAVISTA / ADMINISTRACIÓN BOGOTÁ</div>
+                    <div class="card-title">5.3 MATRIZ DETALLADA DE HALLAZGOS Y NO CONFORMIDADES</div>
                     <table class="data-table">
                         <thead>
                             <tr>
@@ -1234,20 +1248,60 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td class="ph">[Fuente]</td>
-                                <td>Bloque Buenavista</td>
-                                <td class="ph">[Tipo]</td>
-                                <td class="ph">[N]</td>
-                                <td><span class="ph">[%]</span></td>
-                                <td class="ph">[Diligenciar]</td>
+                                <td>Auditoría Interna (FOR-HSEQ-10)</td>
+                                <td>Administración Bogotá</td>
+                                <td>No Conformidad</td>
+                                <td>2</td>
+                                <td><span class="tag tag-warn">50%</span></td>
+                                <td>NC1 (planificación de cambios reforma laboral/CCL) cerrada. NC2 (planificación desplazamientos mensajería motorizada) en proceso.</td>
                             </tr>
                             <tr>
-                                <td class="ph">[Fuente]</td>
+                                <td>Auditoría Interna (FOR-HSEQ-10)</td>
                                 <td>Administración Bogotá</td>
-                                <td class="ph">[Tipo]</td>
-                                <td class="ph">[N]</td>
-                                <td><span class="ph">[%]</span></td>
-                                <td class="ph">[Diligenciar]</td>
+                                <td>Aspecto por Mejorar</td>
+                                <td>6</td>
+                                <td><span class="tag tag-info">EN GESTIÓN</span></td>
+                                <td>Necesidad vs expectativa, valoración riesgos mensajería, cierre acciones Res. 1843/2025, mantenimiento vehículos contratistas, registro capacitaciones Colmédica, eficacia capacitaciones TSA, vacuna tétano conductores.</td>
+                            </tr>
+                            <tr>
+                                <td>Auditoría Externa (Bureau Veritas)</td>
+                                <td>Administración Bogotá / Bloque Buenavista (Campo Corrales)</td>
+                                <td>No Conformidad</td>
+                                <td>0</td>
+                                <td><span class="tag tag-ok">100%</span></td>
+                                <td>Certificación ISO 9001/14001/45001 mantenida, sin hallazgos.</td>
+                            </tr>
+                            <tr>
+                                <td>Inspecciones SST</td>
+                                <td>Bloque Buenavista (Campo Corrales)</td>
+                                <td><span contenteditable="true" data-placeholder="Hallazgos / Obs."></span></td>
+                                <td><span contenteditable="true" data-placeholder="N°"></span></td>
+                                <td><span contenteditable="true" data-placeholder="0%"></span></td>
+                                <td><span contenteditable="true" data-placeholder="Completar"></span></td>
+                            </tr>
+                            <tr>
+                                <td>Simulacros</td>
+                                <td>Bloque Buenavista (Campo Corrales)</td>
+                                <td><span contenteditable="true" data-placeholder="Oportunidad Mejora"></span></td>
+                                <td><span contenteditable="true" data-placeholder="N°"></span></td>
+                                <td><span contenteditable="true" data-placeholder="0%"></span></td>
+                                <td><span contenteditable="true" data-placeholder="Completar"></span></td>
+                            </tr>
+                            <tr>
+                                <td>Reporte Actos/Cond.</td>
+                                <td>Bloque Buenavista (Campo Corrales)</td>
+                                <td>Tarjetas / Reportes</td>
+                                <td><span contenteditable="true" data-placeholder="N°"></span></td>
+                                <td><span contenteditable="true" data-placeholder="0%"></span></td>
+                                <td><span contenteditable="true" data-placeholder="Completar"></span></td>
+                            </tr>
+                            <tr>
+                                <td>Revisión Gerencial</td>
+                                <td>Administración Bogotá</td>
+                                <td>Compromisos</td>
+                                <td><span contenteditable="true" data-placeholder="N°"></span></td>
+                                <td><span contenteditable="true" data-placeholder="0%"></span></td>
+                                <td><span contenteditable="true" data-placeholder="Completar"></span></td>
                             </tr>
                         </tbody>
                     </table>
@@ -1257,29 +1311,28 @@
                         <div class="grid-container">
                             <div class="col-3 kpi-box">
                                 <div class="kpi-sub">TOTAL ACCIONES</div>
-                                <div class="kpi-val ph" style="font-size:22px;">[N]</div>
+                                <div class="kpi-val"><span contenteditable="true" data-placeholder="N°"></span></div>
                             </div>
                             <div class="col-3 kpi-box">
                                 <div class="kpi-sub">CERRADAS</div>
-                                <div class="kpi-val ph" style="font-size:22px;">[N]</div>
+                                <div class="kpi-val" style="color:var(--success)"><span contenteditable="true" data-placeholder="N°"></span></div>
                             </div>
                             <div class="col-3 kpi-box">
                                 <div class="kpi-sub">ABIERTAS</div>
-                                <div class="kpi-val ph" style="font-size:22px;">[N]</div>
+                                <div class="kpi-val" style="color:var(--warning)"><span contenteditable="true" data-placeholder="N°"></span></div>
                             </div>
                             <div class="col-3 kpi-box">
                                 <div class="kpi-sub">% EFICACIA</div>
-                                <div class="kpi-val ph" style="font-size:22px;">[%]</div>
+                                <div class="kpi-val" style="color:var(--warning)"><span contenteditable="true" data-placeholder="XX%"></span></div>
                             </div>
                         </div>
-                        <p style="font-size:12px; margin-top:10px; color:#991b1b;" class="ph">
-                            [Redactar desviación si el nivel de cierre es bajo, y establecer meta prioritaria de cierre]
+                        <p style="font-size:12px; margin-top:10px; color:#991b1b;" contenteditable="true" data-placeholder="Describir desviaciones relevantes en el cierre de hallazgos, si aplica.">
                         </p>
                     </div>
                 </div>
 
                 <div class="card col-12">
-                    <div class="card-title">HALLAZGOS CRÍTICOS - DETALLE ESPECÍFICO</div>
+                    <div class="card-title">HALLAZGOS CRÍTICOS POR SEDE - DETALLE ESPECÍFICO</div>
                     <table class="data-table">
                         <thead>
                             <tr>
@@ -1292,15 +1345,15 @@
                         <tbody>
                             <tr>
                                 <td><strong>BLOQUE BUENAVISTA</strong></td>
-                                <td><span class="ph">[% cierre]</span></td>
-                                <td><span class="ph">[Estado]</span></td>
-                                <td class="ph">[Diligenciar hallazgos críticos abiertos, si aplica]</td>
+                                <td><span contenteditable="true" data-placeholder="% cierre"></span></td>
+                                <td><span contenteditable="true" data-placeholder="Realizadas / Pendientes"></span></td>
+                                <td><span contenteditable="true" data-placeholder="Completar"></span></td>
                             </tr>
                             <tr>
                                 <td><strong>ADMINISTRACIÓN BOGOTÁ</strong></td>
-                                <td><span class="ph">[% cierre]</span></td>
-                                <td><span class="ph">[Estado]</span></td>
-                                <td class="ph">[Diligenciar hallazgos críticos abiertos, si aplica]</td>
+                                <td><span contenteditable="true" data-placeholder="% cierre"></span></td>
+                                <td><span contenteditable="true" data-placeholder="Realizadas / Pendientes"></span></td>
+                                <td><span contenteditable="true" data-placeholder="Completar"></span></td>
                             </tr>
                         </tbody>
                     </table>
@@ -1326,33 +1379,33 @@
                     <tbody>
                         <tr>
                             <td><strong>OPERACIONES</strong></td>
-                            <td class="ph">[Diligenciar decisión estratégica para Bloque Buenavista]</td>
-                            <td class="ph">[Origen]</td>
-                            <td><span class="tag tag-info">EN EVALUACIÓN</span></td>
+                            <td><span contenteditable="true" data-placeholder="Completar decisión"></span></td>
+                            <td><span contenteditable="true" data-placeholder="Completar justificación"></span></td>
+                            <td><span class="tag tag-info">PENDIENTE</span></td>
                         </tr>
                         <tr>
                             <td><strong>HSEQ / COMPRAS</strong></td>
-                            <td class="ph">[Diligenciar]</td>
-                            <td class="ph">[Origen]</td>
-                            <td><span class="tag tag-info">EN EVALUACIÓN</span></td>
+                            <td><span contenteditable="true" data-placeholder="Completar decisión"></span></td>
+                            <td><span contenteditable="true" data-placeholder="Completar justificación"></span></td>
+                            <td><span class="tag tag-info">PENDIENTE</span></td>
                         </tr>
                         <tr>
                             <td><strong>HSEQ</strong></td>
-                            <td class="ph">[Diligenciar]</td>
-                            <td class="ph">[Origen]</td>
-                            <td><span class="tag tag-info">EN EVALUACIÓN</span></td>
+                            <td><span contenteditable="true" data-placeholder="Completar decisión"></span></td>
+                            <td><span contenteditable="true" data-placeholder="Completar justificación"></span></td>
+                            <td><span class="tag tag-info">PENDIENTE</span></td>
                         </tr>
                         <tr>
                             <td><strong>GESTIÓN HUMANA</strong></td>
-                            <td class="ph">[Diligenciar]</td>
-                            <td class="ph">[Origen]</td>
-                            <td><span class="tag tag-info">EN EVALUACIÓN</span></td>
+                            <td><span contenteditable="true" data-placeholder="Completar decisión"></span></td>
+                            <td><span contenteditable="true" data-placeholder="Completar justificación"></span></td>
+                            <td><span class="tag tag-info">PENDIENTE</span></td>
                         </tr>
                         <tr>
                             <td><strong>HSEQ / OPERACIONES</strong></td>
-                            <td class="ph">[Diligenciar]</td>
-                            <td class="ph">[Origen]</td>
-                            <td><span class="tag tag-info">EN EVALUACIÓN</span></td>
+                            <td><span contenteditable="true" data-placeholder="Completar decisión"></span></td>
+                            <td><span contenteditable="true" data-placeholder="Completar justificación"></span></td>
+                            <td><span class="tag tag-info">PENDIENTE</span></td>
                         </tr>
                     </tbody>
                 </table>
@@ -1369,23 +1422,23 @@
                     <tbody>
                         <tr>
                             <td><strong>Infraestructura y Tecnología</strong></td>
-                            <td>Compra de repuestos críticos para mantenimiento predictivo, adecuación servidores, continuidad herramientas digitales.</td>
-                            <td><span class="tag tag-ok">APROBADO</span></td>
+                            <td><span contenteditable="true" data-placeholder="Completar"></span></td>
+                            <td><span class="tag tag-info">PENDIENTE</span></td>
                         </tr>
                         <tr>
                             <td><strong>Talento Humano</strong></td>
-                            <td>Continuidad de planta de personal actual y ejecución del Plan de Capacitación 2026.</td>
-                            <td><span class="tag tag-ok">APROBADO</span></td>
+                            <td><span contenteditable="true" data-placeholder="Completar"></span></td>
+                            <td><span class="tag tag-info">PENDIENTE</span></td>
                         </tr>
                         <tr>
                             <td><strong>Presupuesto HSEQ</strong></td>
-                            <td>Ejecución plan anual: EPP, exámenes médicos, mediciones higiénicas, dotación específica, simulacros.</td>
-                            <td><span class="tag tag-ok">APROBADO</span></td>
+                            <td><span contenteditable="true" data-placeholder="Completar"></span></td>
+                            <td><span class="tag tag-info">PENDIENTE</span></td>
                         </tr>
                         <tr>
                             <td><strong>Asesoría Externa</strong></td>
-                            <td>Soporte especializado para certificación BCP y fortalecimiento competencias digitales.</td>
-                            <td><span class="tag tag-info">EN EVALUACIÓN</span></td>
+                            <td><span contenteditable="true" data-placeholder="Completar"></span></td>
+                            <td><span class="tag tag-info">PENDIENTE</span></td>
                         </tr>
                     </tbody>
                 </table>
@@ -1430,8 +1483,8 @@
                 <div style="margin-top:30px; padding-top:20px; border-top:1px solid #e2e8f0; font-size:11px; color:#64748b;">
                     <div style="display:flex; justify-content:space-between;">
                         <div>
-                            <strong>Elaboró:</strong> COORDINADOR HSEQ (Holman Moreno)<br>
-                            <strong>Revisó:</strong> COORDINADOR HSEQ (Pablo Amézquita)<br>
+                            <strong>Elaboró:</strong> COORDINADOR HSEQ<br>
+                            <strong>Revisó:</strong> COORDINADOR HSEQ<br>
                             <strong>Fecha:</strong> 26/01/2026
                         </div>
                         <div style="text-align:right;">
@@ -1457,8 +1510,8 @@
 
         // Gráficas
         window.onload = function() {
-            // Gráfica de Consumo de Agua - Bloque Buenavista
-            // TODO: Reemplazar el arreglo "data" de cada dataset con los valores reales mensuales de Nikoil
+            // Gráfica de Consumo de Agua
+            // TODO: Reemplazar el arreglo "data" con los valores reales mensuales de Nikoil - Bloque Buenavista (Campo Corrales)
             const ctxAgua = document.getElementById('chartAgua');
             if (ctxAgua) {
                 new Chart(ctxAgua.getContext('2d'), {
@@ -1466,7 +1519,7 @@
                     data: {
                         labels: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
                         datasets: [{
-                            label: 'Consumo 2025 (m³)',
+                            label: 'Consumo 2025 (m³) - EJEMPLO',
                             data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
                             borderColor: '#0ea5e9',
                             backgroundColor: 'rgba(14, 165, 233, 0.1)',
@@ -1474,7 +1527,7 @@
                             fill: true
                         }, {
                             label: 'Meta (m³)',
-                            data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                            data: [300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300],
                             borderColor: '#ef4444',
                             borderDash: [5, 5],
                             borderWidth: 2,
@@ -1508,8 +1561,8 @@
                 });
             }
 
-            // Gráfica de Gestión de Residuos - Bloque Buenavista
-            // TODO: Reemplazar el arreglo "data" de cada dataset con los valores reales (Kg) de Nikoil
+            // Gráfica de Gestión de Residuos
+            // TODO: Reemplazar el arreglo "data" con los valores reales (Kg) de Nikoil - Bloque Buenavista (Campo Corrales)
             const ctxResiduos = document.getElementById('chartResiduos');
             if (ctxResiduos) {
                 new Chart(ctxResiduos.getContext('2d'), {
@@ -1517,13 +1570,13 @@
                     data: {
                         labels: ['Reciclables', 'Orgánicos', 'Peligrosos', 'Ordinarios', 'Chatarra'],
                         datasets: [{
-                            label: '2024 (Kg)',
+                            label: '2024 (Kg) - EJEMPLO',
                             data: [0, 0, 0, 0, 0],
                             backgroundColor: 'rgba(100, 116, 139, 0.6)',
                             borderColor: '#64748b',
                             borderWidth: 1
                         }, {
-                            label: '2025 (Kg)',
+                            label: '2025 (Kg) - EJEMPLO',
                             data: [0, 0, 0, 0, 0],
                             backgroundColor: 'rgba(16, 185, 129, 0.6)',
                             borderColor: '#10b981',
@@ -1553,16 +1606,16 @@
                 });
             }
         };
-        // --- GRÁFICA DE RIESGOS (CONSOLIDADO TOTAL) ---
-        // TODO: Reemplazar las etiquetas y los valores del arreglo "data" con las cifras reales de riesgos de Nikoil
+        // --- GRÁFICA DE RIESGOS ---
+        // TODO: Reemplazar labels y data con la clasificación real de riesgos de Nikoil - Bloque Buenavista (Campo Corrales)
             const ctxRiesgos = document.getElementById('chartRiesgos');
             if (ctxRiesgos) {
                 new Chart(ctxRiesgos.getContext('2d'), {
                     type: 'doughnut',
                     data: {
-                        labels: ['Bajo (0)', 'Moderado (0)', 'Alto (0)', 'Extremo (0)'],
+                        labels: ['Bajo', 'Moderado', 'Alto', 'Extremo'],
                         datasets: [{
-                            data: [0, 0, 0, 0],
+                            data: [1, 1, 1, 1],
                             backgroundColor: ['#10b981', '#f59e0b', '#f97316', '#ef4444'],
                             borderWidth: 0
                         }]
